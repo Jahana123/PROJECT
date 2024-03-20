@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Forgery Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    
+    <style>
+        .btn {
+            padding: 5px;
+            border-style: groove;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #d81d7e;
+            color: #fff;
+            border-radius: 20px;
+            font-size: large;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-style: normal;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover {
+            background-color:#d73fae;
+        }
+        .btn-choose-file,
+        .btn-predict {
+            display: inline-block;
+            width: 150px; 
+            height: 40px; 
+            margin-right: 10px; 
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2> IMAGE   FORGERY   DETECTION </h2>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <div class="file-input-wrapper">
+                <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" style="display: none;">
+                <label for="file" class="btn btn-choose-file">Choose File</label>
+            </div>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        {% if prediction %}
+        <div class="prediction">
+            <h3>Prediction:</h3>
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
